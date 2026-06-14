@@ -1,0 +1,28 @@
+# Pull the CPU-only PyTorch build. This keeps the install small enough for
+# Streamlit Community Cloud (the default build bundles CUDA and is multi-GB).
+# For local GPU work, install torch separately from https://pytorch.org .
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# Core deep-learning framework.
+torch>=2.0
+
+# Audio I/O and feature extraction.
+librosa>=0.10
+soundfile>=0.12
+audioread>=3.0
+
+# Numerics / ML utilities.
+numpy>=1.24
+scipy>=1.10
+scikit-learn>=1.3
+pandas>=2.0
+
+# Plotting and progress.
+matplotlib>=3.7
+tqdm>=4.65
+
+# Config.
+PyYAML>=6.0
+
+# Web app.
+streamlit>=1.30

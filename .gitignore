@@ -1,0 +1,52 @@
+# ---- Datasets (never commit the audio corpus) ----
+data/
+*.wav
+*.flac
+*.mp3
+*.ogg
+*.m4a
+*.aac
+*.wma
+# (the small assets/ samples, if any, can be force-added with `git add -f`)
+
+# ---- Trained models ----
+# Track the final model with Git LFS instead of committing the raw binary,
+# or host it externally and download at runtime. Un-ignore via `git add -f`
+# if you deliberately commit it through LFS.
+models/*.pt
+models/*.pth
+models/*.ckpt
+!models/.gitkeep
+# Commit the small trained model directly so Streamlit Cloud can load it at runtime.
+!models/best_model.pt
+
+# ---- Generated reports / figures (optional: commit if you want them in-repo) ----
+reports/metrics.json
+reports/history.json
+reports/figures/*.png
+!reports/figures/.gitkeep
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+ENV/
+
+# ---- Notebooks ----
+.ipynb_checkpoints/
+
+# ---- Tooling / OS ----
+.claude/
+.pytest_cache/
+.mypy_cache/
+.DS_Store
+.idea/
+.vscode/
+*.log
