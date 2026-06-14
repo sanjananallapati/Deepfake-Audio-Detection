@@ -31,7 +31,25 @@ from src.features import audio_path_to_feature  # noqa: E402
 from src.predict import load_bundle, predict_array  # noqa: E402
 
 DEFAULT_MODEL = str(ROOT / "models" / "best_model.pt")
+METRICS_PATH = ROOT / "reports" / "metrics.json"
 ACCEPTED = ["wav", "flac", "mp3", "ogg", "m4a", "aac"]
+
+
+@st.cache_data(show_spinner=False)
+def get_test_metrics():
+    """Load the held-out test-set metrics written by ``src/evaluate.py``.
+
+    Returns ``None`` if the report is absent, so the app falls back to the
+    checkpoint's (optimistic) validation numbers.
+    """
+    import json
+
+    if not METRICS_PATH.exists():
+        return None
+    try:
+        return json.loads(METRICS_PATH.read_text())
+    except Exception:  # noqa: BLE001
+        return None
 
 st.set_page_config(page_title="Deepfake Audio Detector", page_icon="🎙️", layout="centered")
 
@@ -84,9 +102,17 @@ def main():
         st.error(f"Failed to load the model: {e}")
         st.stop()
 
-    if bundle.meta.get("val_eer") is not None:
+    test_metrics = get_test_metrics()
+    if test_metrics is not None:
         st.sidebar.success(
-            f"Model loaded\nval EER: {bundle.meta['val_eer']*100:.2f}%\n"
+            "Model loaded — held-out **test set**\n"
+            f"Accuracy: {test_metrics['accuracy']*100:.2f}%\n"
+            f"EER: {test_metrics['eer']*100:.2f}%\n"
+            f"F1 (macro): {test_metrics['f1_macro']*100:.2f}%"
+        )
+    elif bundle.meta.get("val_eer") is not None:
+        st.sidebar.success(
+            f"Model loaded (validation metrics)\nval EER: {bundle.meta['val_eer']*100:.2f}%\n"
             f"val acc: {bundle.meta['val_accuracy']*100:.2f}%"
         )
 

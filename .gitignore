@@ -21,7 +21,8 @@ models/*.ckpt
 !models/best_model.pt
 
 # ---- Generated reports / figures (optional: commit if you want them in-repo) ----
-reports/metrics.json
+# metrics.json is committed so the deployed app can show real test-set numbers.
+!reports/metrics.json
 reports/history.json
 reports/figures/*.png
 !reports/figures/.gitkeep

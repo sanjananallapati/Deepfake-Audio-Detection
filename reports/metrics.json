@@ -1,0 +1,38 @@
+{
+  "accuracy": 0.9106603366422098,
+  "eer": 0.04050632911392402,
+  "eer_threshold": 0.09840721414436271,
+  "f1_macro": 0.9102843271843619,
+  "f1_genuine": 0.9160924199432509,
+  "f1_deepfake": 0.904476234425473,
+  "precision_macro": 0.9222026438438713,
+  "recall_macro": 0.912618717478493,
+  "per_class_accuracy": {
+    "Genuine": 0.9982332155477032,
+    "Deepfake": 0.8270042194092827
+  },
+  "confusion_matrix": [
+    [
+      2260,
+      4
+    ],
+    [
+      410,
+      1960
+    ]
+  ],
+  "support": {
+    "Genuine": 2264,
+    "Deepfake": 2370
+  },
+  "n_samples": 4634,
+  "far_at_eer": 0.04050632911392405,
+  "frr_at_eer": 0.04019434628975265,
+  "thresholds": {
+    "accuracy_min": 0.8,
+    "eer_max": 0.12,
+    "f1_min": 0.8,
+    "per_class_acc_min": 0.75
+  },
+  "passes_verification": true
+}
