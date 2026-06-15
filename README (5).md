@@ -27,7 +27,6 @@ that takes an audio file and returns the verdict plus a confidence score.
 - [Streamlit web app](#streamlit-web-app)
 - [Preprocessing & feature extraction](#preprocessing--feature-extraction)
 - [Model architecture](#model-architecture)
-- [Evaluation metrics & verification thresholds](#evaluation-metrics--verification-thresholds)
 - [Results](#results)
 - [Reproducibility](#reproducibility)
 - [Deployment](#deployment)
@@ -247,26 +246,6 @@ saved checkpoint.
 **Training recipe:** Adam (`lr=1e-3`, `weight_decay=1e-4`), cross-entropy with
 optional class weights, `ReduceLROnPlateau` on val loss, early stopping on val
 EER (patience 7), mixed precision when CUDA is available.
-
-## Evaluation metrics & verification thresholds
-
-Per the problem statement, a submission is **valid only if both primary
-thresholds are met** on the evaluation set; the secondary metrics are also
-reported.
-
-| Type | Metric | Required |
-|---|---|---|
-| Primary (§5) | Overall Accuracy | **≥ 80 %** |
-| Primary (§5) | Equal Error Rate (EER) | **≤ 12 %** |
-| Secondary (§4) | F1 Score (macro) | ≥ 80 % |
-| Secondary (§4) | Per-Class Accuracy (each class) | ≥ 75 % |
-| Secondary (§4) | Confusion Matrix | reported |
-
-> **EER** is the operating point where the false-acceptance rate equals the
-> false-rejection rate (lower = a more balanced, reliable detector). Accuracy is
-> additionally judged on a **private hidden test set**, which is why the pipeline
-> emphasises generalisation (instance norm, SpecAugment, class weights,
-> EER-based model selection).
 
 ## Results
 
