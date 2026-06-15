@@ -1,5 +1,7 @@
 # Deepfake Audio Detection 🎙️🛡️
 
+Live Demo : https://deepfake-audio-detection-3ku6xfjg2cujnvosmrxjnj.streamlit.app/
+
 Classify a speech recording as **Genuine (Human)** or **Deepfake (AI-Generated)**.
 
 This repository is a complete, reproducible solution for *Problem Statement 2 —
